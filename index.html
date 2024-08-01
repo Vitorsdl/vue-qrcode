@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/vue-qrcode/favicon.ico">
+  <script src="./src/js/vue.min.js"></script>
+  <script src="./src/js/qrious.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de QRCode</title>
+  <link rel="stylesheet" crossorigin href="/vue-qrcode/assets/index-TgZN4h2C.css">
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{ title }}</h1>
+
+    <div>
+      <input type="text" size="25" placeholder="Digite para gerar..." v-model="text">
+    </div>
+    <div v-if="text" class="output">
+      <img :src="newQRCode" alt="QRCode">
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        title: 'Gerador QRCode',
+        text: '',
+        qrcode: new QRious({ size: 300 })
+      },
+      computed: {
+        newQRCode() {
+          this.qrcode.value = this.text
+          return this.qrcode.toDataURL()
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>
